@@ -16,14 +16,20 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
       setUserDescription(res.about);
       setUserAvatar(res.avatar)
     })
-  })
+    .catch((err) => {
+      console.log(err);
+    })
+  }, [])
 
   React.useEffect(() => {
     api.getInitialCards()
     .then((res) => {
       setCards(res);
     })
-  })
+    .catch((err) => {
+      console.log(err);
+    })
+  }, [])
   
   return (
       <main className="main">
@@ -42,8 +48,8 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
         </section>
 
         <section className="elements">
-          {cards.map((card, i) => (
-            <Card card={card} key={i} onCardClick={onCardClick}/>
+          {cards.map((card, _id) => (
+            <Card card={card} key={_id} onCardClick={onCardClick}/>
           ))};
         </section>
       </main>
