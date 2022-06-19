@@ -1,5 +1,4 @@
 function PopupWithForm({name, title, isOpen, children, onClose, buttonText, onSubmit}) {
-
   return (
     <div className={isOpen ? "popup popup_opened" : "popup"} id={"popup-" + name}>
         <div className="popup__box">

@@ -6,7 +6,6 @@ function AddPlacePopup({isOpen, onClose, onAddPlace}) {
   const [place, setPlace] = React.useState('');
   const [url, setUrl] = React.useState('');
 
-
   React.useEffect(() => {
     setPlace('');
     setUrl('');
