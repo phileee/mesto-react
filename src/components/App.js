@@ -17,6 +17,12 @@ function App() {
     avatar: "https://static.tildacdn.com/tild3637-3531-4565-a161-653761663261/74H8gif.gif",
     name: "Загрузка"});
 
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState(null);
+  const [cards, setCards] = React.useState([]);
+
   React.useEffect(() => {
     api.getInitialUser()
     .then((res) => {
@@ -26,13 +32,6 @@ function App() {
       console.log(err);
     })
   }, [])
-
-
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState(null);
-  const [cards, setCards] = React.useState([]);
 
 
   function handleEditAvatarClick() {
@@ -99,14 +98,14 @@ function App() {
     
     api.toggleLike(card._id, isLiked ? 'DELETE' : 'PUT')
       .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        setCards(state => state.map(c => c._id === card._id ? newCard : c));
       });
   }
 
   function handleDeleteClick(card) {
     api.deleteCard(card._id)
       .then(() => {
-        setCards(cards.filter(c => card._id !== c._id))
+        setCards(cards => cards.filter(c => card._id !== c._id))
       })
       .catch((err) => {
         console.log(err);
